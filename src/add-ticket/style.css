@@ -1,0 +1,38 @@
+.addIcon{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: #2980b9;
+   transform: scale(1.6);
+}
+
+.paper {
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    padding-top: 200px;
+}
+
+.paperc {
+  padding-bottom: 15px;
+  margin: 0 auto;
+  width: 500px;
+  background: white;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.papertext{
+  display: block;
+  outline: none;
+  width: 95%;
+  margin: 10px auto;
+  height: 100%;
+}
+
+.textArea{
+  width: 90%;
+  margin-bottom: 10px;
+}

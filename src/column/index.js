@@ -13,11 +13,18 @@ function Column(props) {
       {(provided, snapshot) => (
         <div 
           ref={provided.innerRef}
-      {...provided.droppableProps}
+          style={{ backgroundColor: snapshot.isDraggingOver ? '#9a9a9a' : '#ecf0f1' }}
+          {...provided.droppableProps}
         className="column">
+        <h2 className="title"> {props.title} </h2>
         {tickets.map((ticket, index) => {
           if(ticket.colId == props.id){
-            return <Ticket key={ticket.id} data={ticket} index={index}/>
+            return <Ticket 
+              key={ticket.id} 
+              data={ticket} 
+              index={index}
+              onRemove={props.onRemoveTicket}
+            />
           }
         })}
         </div>

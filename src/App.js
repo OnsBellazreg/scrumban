@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
+import Header from './header';
 import Column from './column';
+import AddTicket from './add-ticket';
 import {DragDropContext} from "react-beautiful-dnd";
 
 const getItems = (count, colId, content=null) =>
@@ -18,16 +20,24 @@ const reorder = (list, startIndex, endIndex, colId) => {
   return result;
 };
 
+const remove = (list, startIndex, endIndex, colId) => {
+  const result = Array.from(list);
+  result.splice(startIndex, 1);
+  return result;
+};
+
+
 const initialTickets = [
-  ...getItems(5, 0, "ticket"),
-  ...getItems(2,1),
-  ...getItems(1,3, "new ticket")
+  ...getItems(2, 0, "test tickets"),
+  ...getItems(3,1),
+  ...getItems(3,2),
+  ...getItems(1,3)
 ];
 const initialCols = [
-  {id: 0, name: "test"},
-  {id: 1, name: "test"},
-  {id: 2, name: "test"},
-  {id: 3, name: "test"},
+  {id: 0, name: "To do"},
+  {id: 1, name: "In Progress"},
+  {id: 2, name: "In Review"},
+  {id: 3, name: "Done"},
 ];
 
 function App() {
@@ -47,19 +57,39 @@ function App() {
       result.destination.droppableId.split("-")[1]
     );
 
-    console.log(newOrderedItems)
+    setTickets(newOrderedItems);
+  }
+
+  function handleAddTicket(text) {
+    const newTicket = getItems(1, cols[0].id, text);
+    setTickets([
+      ...newTicket,
+      ...tickets
+    ]);
+  }
+
+  function handleOnRemoveTicket(ticketId, index) {
+    const newOrderedItems = remove(tickets, index);
     setTickets(newOrderedItems);
   }
 
   return (
     <div>
+    <Header/>
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="container">
       {cols.map(col => (
-        <Column key={col.id} tickets={tickets} id={col.id}/>
+        <Column 
+          key={col.id} 
+          title={col.name} 
+          tickets={tickets} 
+          id={col.id}
+          onRemoveTicket={handleOnRemoveTicket}
+        />
       ))}
       </div>
     </DragDropContext>
+    <AddTicket onAddTicket={handleAddTicket}/>
     </div>
   );
 }

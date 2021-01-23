@@ -1,9 +1,18 @@
 .ticket {
   max-width: 100%;
-  min-height: 60px;
-  max-height: 100px;
-  background: #bdc3c7;
+  min-height: 80px;
+  max-height: 150px;
+  background: #2c3e50;
+  color: #fff;
   border-radius: 3px;
-  margin: 3px 5px;
+  margin: 10px 10px;
   margin-bottom:0;
+  padding: 20px;
+  font-family: Helvetica, sans-serif;
+  word-wrap: nowrap;
+  overflow: auto;
+}
+
+.clearIcon:hover{
+  color: grey;
 }
