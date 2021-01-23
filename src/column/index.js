@@ -1,14 +1,28 @@
 import React from 'react';
 import Ticket from '../ticket';
-
+import { Droppable} from "react-beautiful-dnd";
 import './style.css';
 
-function Column() {
+function Column(props) {
+  console.log(props);
+  const tickets = props.tickets;
+  const droppableId = `droppableId-${props.id}`;
+
   return (
-    <div className="column">
-    <Ticket/>
-    <Ticket/>
-    </div>
+    <Droppable droppableId={droppableId}>
+      {(provided, snapshot) => (
+        <div 
+          ref={provided.innerRef}
+      {...provided.droppableProps}
+        className="column">
+        {tickets.map((ticket, index) => {
+          if(ticket.colId == props.id){
+            return <Ticket key={ticket.id} data={ticket} index={index}/>
+          }
+        })}
+        </div>
+    )}
+    </Droppable>
   );
 }
 

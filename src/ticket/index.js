@@ -1,10 +1,23 @@
 import React from 'react';
 import './style.css';
+import {Draggable} from "react-beautiful-dnd";
 
-function Ticket() {
+function Ticket(props) {
+  const data = props.data;
+  const draggableId = `draggableId${data.id}`;
+
   return (
-    <div className="ticket">
-    </div>
+    <Draggable draggableId={draggableId} index={props.index}>
+    {(provided, snapshop) => (
+      <div       
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+      className="ticket">
+      {data.content}
+      </div>
+    )}
+    </Draggable>
   );
 }
 
